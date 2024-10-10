@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface BeerDAO {
     @Query("SELECT * FROM beers")
-    fun getAllBeers(): LiveData<List<BeerEntity>>
+    fun getAllBeers(): Flow<List<BeerEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBeers(beers: List<BeerEntity>)

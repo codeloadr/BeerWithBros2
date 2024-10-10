@@ -18,7 +18,7 @@ class BeerRepository @Inject constructor(
     /**
      * Get all beers from the database.
      */
-    fun getBeers(): LiveData<List<Beer>> = beerDao.getAllBeers().map { beers ->
+    fun getBeers(): Flow<List<Beer>> = beerDao.getAllBeers().map { beers ->
         beers.map { beer ->
             Beer(
                 beer.id,
