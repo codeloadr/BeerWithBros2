@@ -27,16 +27,23 @@ class BeerFragment : Fragment(R.layout.fragment_beer_list) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBeerListBinding.bind(view)
         val beerAdapter = BeerRecyclerViewAdapter()
+
         binding?.apply {
-            list.apply {
+            recyclerView.apply {
                 adapter= beerAdapter
             }
+        }
+
+        binding?.swipeRefresh?.setOnRefreshListener {
+            viewModel.onRefresh()
+            binding?.swipeRefresh?.isRefreshing = false
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.beerStateFlow.collectLatest {
                     beerAdapter.submitList(it)
+
                 }
             }
         }

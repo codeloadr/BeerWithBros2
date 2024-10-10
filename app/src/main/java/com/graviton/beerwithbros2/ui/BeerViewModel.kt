@@ -8,7 +8,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,12 +18,18 @@ class BeerViewModel @Inject constructor(
     private var _beersStateFlow = MutableStateFlow<List<Beer>>(emptyList())
     val beerStateFlow: StateFlow<List<Beer>> = _beersStateFlow.asStateFlow()
 
+    init {
+        viewModelScope.launch {
+            repository.getBeers().observeForever { beers ->
+                _beersStateFlow.value = beers
+            }
+            onRefresh()
+        }
+    }
+
     fun onRefresh() {
         viewModelScope.launch {
-            repository.getBeers()
-                .collect {beers ->
-                    _beersStateFlow.value = beers
-                }
+            repository.fetchBeers()
         }
     }
 }

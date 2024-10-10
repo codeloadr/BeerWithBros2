@@ -28,14 +28,14 @@ class BeerRecyclerViewAdapter : ListAdapter<Beer, ViewHolder>(MyDiffUtil) {
 
     }
 
-    inner class ViewHolder(val binding: FragmentBeerItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: FragmentBeerItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val name: TextView = binding.name
-        val desc: TextView = binding.desc
+        private val desc: TextView = binding.desc
         fun bind(beer: Beer) {
-            Glide.with(binding.image)
-                .load(beer.imageUrl)
-                .fitCenter()
-                .into(binding.image)
+//            Glide.with(binding.image)
+//                .load(beer.imageUrl)
+//                .fitCenter()
+//                .into(binding.image)
             name.text = beer.name
             desc.text = beer.description
         }
