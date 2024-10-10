@@ -6,11 +6,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.graviton.beerwithbros2.databinding.FragmentBeerItemBinding
 import com.graviton.beerwithbros2.model.Beer
 import com.graviton.beerwithbros2.ui.BeerRecyclerViewAdapter.ViewHolder
-import com.graviton.beerwithbros2.ui.placeholder.PlaceholderContent.PlaceholderItem
 
 /**
  * [RecyclerView.Adapter] that can display a [Beer].

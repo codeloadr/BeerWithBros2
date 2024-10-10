@@ -12,7 +12,9 @@ import javax.inject.Inject
 class BWBApplication : Application(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
-        setupPeriodicBeerFeedSync(this)
+        Executors.newSingleThreadExecutor().execute {
+            setupPeriodicBeerFeedSync(this)
+        }
     }
 
     @Inject
